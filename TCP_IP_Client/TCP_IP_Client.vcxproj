@@ -116,10 +116,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LoopBuffer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyClient.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LoopBuffer.h" />
     <ClInclude Include="MyClient.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

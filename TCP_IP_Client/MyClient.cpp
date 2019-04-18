@@ -1,8 +1,8 @@
 #include "MyClient.h"
+#include "LoopBuffer.h"
 
 SOCKET MyClient::Connection = NULL;
 bool MyClient::closeSocket = FALSE;
-char MyClient::dataBuff[2000];
 
 MyClient::MyClient()
 {
@@ -30,7 +30,7 @@ bool MyClient::Connect(const char* ip, int port)
 	}
 	closeSocket = true;
 
-	//CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)readData, NULL, NULL, NULL);
+	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)readData, NULL, NULL, NULL);
 
 	return closeSocket;
 }
@@ -38,23 +38,18 @@ bool MyClient::Connect(const char* ip, int port)
 int32_t MyClient::readData(char* inBuff, uint16_t lenMax)
 {
 	int32_t lenRecive;
+	LoopBuffer buff;
 
-	lenRecive = recv(Connection, inBuff, lenMax, NULL);
-
-	if (lenRecive > 0)
+	while (true)
 	{
-		msgIn(inBuff, lenRecive);
-	}
+		lenRecive = recv(Connection, inBuff, lenMax, NULL);
 
+		if (lenRecive > 0)
+		{
+			buff.add(inBuff, lenMax);
+		}
+	}
 	return lenRecive;
-}
-
-void MyClient::msgIn(char *inBuff, int msgSize)
-{
-	for (int i = 0; i < msgSize; i++)
-	{
-		dataBuff[i] = *(inBuff + i);
-	}
 }
 
 void MyClient::checkConnection(const char * ip, int port)
@@ -74,6 +69,16 @@ int32_t MyClient::sendData(char * ourBuff, uint16_t len)
 	}
 
 	return lenSend;
+}
+
+int32_t MyClient::readDataBuff(char *inBuff , int32_t lenMax)
+{
+	LoopBuffer buff;
+	int32_t lenRecv;
+
+	buff.read(inBuff, lenMax);
+
+	return 0;
 }
 
 MyClient::~MyClient()

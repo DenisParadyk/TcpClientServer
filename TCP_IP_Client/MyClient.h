@@ -1,10 +1,10 @@
 #pragma once
-#include <iostream>
 #include <string>
+#include <iostream>
 #include <WS2tcpip.h>
-#pragma comment(lib, "ws2_32.lib")
-
+#include "LoopBuffer.h"
 #pragma warning(disable: 4996)
+#pragma comment(lib, "ws2_32.lib")
 
 class MyClient
 {
@@ -12,15 +12,13 @@ public:
 
 	MyClient();
 	static int32_t readData(char* inBuff, uint16_t lenMax);
-	int32_t sendData(char* ourBuff, uint16_t len);	
-	bool Connect(const char* ip, int port);
-	static void msgIn(char* inBuff, int msgSize);
 	void checkConnection(const char* ip, int port);
+	static int32_t sendData(char* ourBuff, uint16_t len);
+	int32_t readDataBuff(char* inBuff, int32_t lenMax);
+	bool Connect(const char* ip, int port);
 	~MyClient();
-
 private:
 
-	static char dataBuff[2000];
 	static SOCKET Connection;
 	static bool closeSocket;
 	SOCKADDR_IN addr;

@@ -2,27 +2,30 @@
 
 int main()
 {
-	MyClient client;
-	const char ip[] = "127.0.0.1";
-	int port = 8888;
+	LoopBuffer buff;
 
-	client.Connect(ip, port);
-	client.checkConnection(ip, port);
+	char a[] = "123456";
+	char c[] = "78";
+	char b[4];
 
-	char Sbuff[] = "My_Message";
-	char* Rbuff = new char[256];
+ 	buff.add(a, strlen(a));
+	int result = buff.read(b,1);
+	buff.showValues(b, result);
+	buff.add(c, strlen(c));
 
-	int32_t SbuffSize = sizeof(Sbuff);
-	int32_t RbuffSize = sizeof(Rbuff);
 
-	while (client.Connect(ip, port))
-	{
-		client.readData(Rbuff, RbuffSize);
-		client.sendData(Sbuff, SbuffSize);	
-	}
+	result = buff.read(b, sizeof(b));
+	buff.add("9", 1);
+	buff.showValues(b, result);
+	//std::cout << result << std::endl;
 
-	delete[] Rbuff;
-	system("pause");
+	result = buff.read(b, sizeof(b));
+	buff.showValues(b, result);
+	//std::cout << result << std::endl;
+
+	result = buff.read(b, sizeof(b));
+	buff.showValues(b, result);
+	//std::cout << result << std::endl;
 
 	return 0;
 }

@@ -4,28 +4,48 @@ int main()
 {
 	LoopBuffer buff;
 
+	int a[] = {1, 2, 3, 4, 5 ,6};
+	int c[] = {7, 8};
+	int b[8];
+
+ 	buff.add(a, 6);
+	buff.add(c, 2);
+
+ 	int result = buff.read(b, 8);
+
+	buff.showValues(b, 8);
+
+	std::cout << "\tButes read:" << result << std::endl;
+
+	/*
 	char a[] = "123456";
-	char c[] = "78";
-	char b[4];
+	char b[] = "78";
+	char c[8];
+	
+	buff.add(a, strlen(a));
+	buff.add(b, strlen(a));
 
- 	buff.add(a, strlen(a));
-	int result = buff.read(b,1);
-	buff.showValues(b, result);
-	buff.add(c, strlen(c));
+	int result = buff.read(b, 5);
 
+	buff.showValues(b, 5);
 
-	result = buff.read(b, sizeof(b));
-	buff.add("9", 1);
-	buff.showValues(b, result);
-	//std::cout << result << std::endl;
+	std::cout << "\tButes read:" << result << std::endl;
+	*/
 
-	result = buff.read(b, sizeof(b));
-	buff.showValues(b, result);
-	//std::cout << result << std::endl;
+	/*
+	float a[] = { 1, 2, 3, 4, 5 ,6 };
+	float b[] = { 7, 8 };
+	float c[8];
 
-	result = buff.read(b, sizeof(b));
-	buff.showValues(b, result);
-	//std::cout << result << std::endl;
+	buff.add(a, 6);
+	buff.add(b, 2);
+
+	int result = buff.read(b, 8);
+
+	buff.showValues(b, 8);
+
+	std::cout << "\tButes read:" << result << std::endl;
+	*/
 
 	return 0;
 }

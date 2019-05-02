@@ -38,7 +38,7 @@ bool MyClient::Connect(const char* ip, int port)
 int32_t MyClient::readData(char* inBuff, uint16_t lenMax)
 {
 	int32_t lenRecive;
-	LoopBuffer buff;
+	//LoopBuffer buff;
 
 	while (true)
 	{
@@ -46,7 +46,7 @@ int32_t MyClient::readData(char* inBuff, uint16_t lenMax)
 
 		if (lenRecive > 0)
 		{
-			buff.add(inBuff, lenMax);
+		//	buff.add(inBuff, lenMax);
 		}
 	}
 	return lenRecive;
@@ -73,10 +73,10 @@ int32_t MyClient::sendData(char * ourBuff, uint16_t len)
 
 int32_t MyClient::readDataBuff(char *inBuff , int32_t lenMax)
 {
-	LoopBuffer buff;
+	//LoopBuffer buff;
 	int32_t lenRecv;
 
-	buff.read(inBuff, lenMax);
+	//buff.read(inBuff, lenMax);
 
 	return 0;
 }

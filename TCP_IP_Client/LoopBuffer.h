@@ -3,13 +3,22 @@
 
 #define emptyBute 0
 
+template <class T>
 class LoopBuffer
 {
 public:
 
-	LoopBuffer();
+	LoopBuffer()
+	{
+		theLastAdress = 0;
+		counterButes = 0;
 
-	template <typename T>
+		for (int i = 0; i < sizeof(MyBuff); i++)
+		{
+			MyBuff[i] = emptyBute;
+		}
+	}
+
 	bool add(const T* data, int size)
 	{
 		for (int i = 0; i < size; i++)
@@ -33,8 +42,7 @@ public:
 		return true;
 	}
 
-	template <typename T>
-	int32_t read(T* userBuff, int len) 
+	int32_t read(T* userBuff, int len)
 	{
 		int tempFrst = sizeof(MyBuff) + (theLastAdress - counterButes);
 		int tempScnd = theLastAdress - counterButes;
@@ -92,7 +100,6 @@ public:
 		return bytesRead;
 	}
 
-	template <typename T>
 	void showValues(T* data, int size)
 	{
 		for (int i = 0; i < size; i++)
@@ -105,14 +112,11 @@ public:
 			std::cout << data[i] << " ";
 		}
 	}
-	
-	bool checkData(int dataSize, int userBuffSize, char* data, char* userBuff);
 
-private:  
+private:
 
-	char MyBuff[1000];
+	T MyBuff[1000];
 	int theLastAdress;
 	int counterButes;
 
 };
- 

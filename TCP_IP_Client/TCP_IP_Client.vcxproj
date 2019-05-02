@@ -116,7 +116,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LoopBuffer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyClient.cpp" />
   </ItemGroup>
